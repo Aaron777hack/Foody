@@ -1,1 +1,1 @@
-DjangoEcommerce
+DjangoTestTechnique

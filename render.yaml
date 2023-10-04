@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: DjangoEcommerce
+    name: DjangoTestTechnique
     buildCommand: "./build.sh"
     env: python
-    startCommand: "gunicorn DjangoEcommerce.wsgi:application"
+    startCommand: "gunicorn DjangoTestTechnique.wsgi:application"
