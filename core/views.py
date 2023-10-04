@@ -65,13 +65,13 @@ class HomeView(ListView):
             if nombre_annees >=1:
                 badge = Badge(user=user_name, label="Pionner")
                 badge.save()
-        # nombre_produits = Item.objects.filter(user=user_name).count()
-        # existing_badge = Badge.objects.filter(user=user_name, label="Collector").first()
-        # if not existing_badge:
-        #     if nombre_produits <5:
+        nombre_produits = Item.objects.filter(user=user_name).count()
+        existing_badge = Badge.objects.filter(user=user_name, label="Collector").first()
+        if existing_badge:
+            if nombre_produits <5:
 
-        #         badge = Badge.objects.get(user=user_name)
-        #         badge.delete()
+                badge = Badge.objects.get(user=user_name)
+                badge.delete()
 
 
 
