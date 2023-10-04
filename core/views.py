@@ -41,23 +41,18 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        # Récupérez l'utilisateur spécifique (par exemple, l'utilisateur connecté)
         user_name = self.request.user
         
-        # Récupérez les badges associés à cet utilisateur
         badges = user_name.badge_set.all()
 
         user = User.objects.get(id=user_name.id)
 
         date_inscription = user.date_joined
 
-        # Obtenez la date actuelle
         date_actuelle = datetime.now(timezone.utc)
 
-        # Calculez la différence entre la date actuelle et la date d'inscription
         difference = date_actuelle - date_inscription
 
-        # Obtenez le nombre d'années et de mois dans la différence
         nombre_annees = difference.days // 365
 
         existing_badge = Badge.objects.filter(user=user, label="Pionner").first()
@@ -78,7 +73,6 @@ class HomeView(ListView):
         
         print(nombre_annees)
         
-        # Ajoutez les badges au contexte de la vue
         context['user_badges'] = badges
         
         return context
@@ -93,40 +87,32 @@ class ProductView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        # Récupérez l'utilisateur spécifique (par exemple, l'utilisateur connecté)
         user = self.request.user
         
-        # Récupérez l'utilisateur spécifique (par exemple, l'utilisateur avec l'ID 1)
        
-        # Récupérez les badges associés à cet utilisateur
         badges = user.badge_set.all()
         
-        # Ajoutez les badges au contexte de la vue
         context['user_badges'] = badges
         
         return context
     
     def track_product_click(request, pk, **kwargs):
-        # Récupérez le produit à partir de la base de données
+        
         product = get_object_or_404(Item, pk=pk)
 
-        # Vérifiez si l'utilisateur a déjà cliqué sur ce produit dans la session
         clicked_products = request.session.get('clicked_products', [])
         if pk not in clicked_products:
-            # Incrémentation de la valeur views
             product.views += 1
             if product.views >=1000:
                 badge = Badge(user=product.user, label="Start")
                 badge.save()
 
             product.save()
-            # Enregistrez ce produit comme "clic" dans la session
             clicked_products.append(pk)
             request.session['clicked_products'] = clicked_products
           
             
         
-        # Redirigez l'utilisateur vers la vue détaillée du produit
         return redirect(product.get_absolute_url())
    
 
@@ -163,9 +149,7 @@ class CheckoutView(View):
                 apartment_address = form.cleaned_data.get('apartment_address')
                 country = form.cleaned_data.get('country')
                 zip = form.cleaned_data.get('zip')
-                # TODO: add functionaly for these fields
-                # same_billing_address = form.cleaned_data.get('same_billing_address')
-                # save_info = form.cleaned_data.get('save_info')
+                
                 payment_option = form.cleaned_data.get('payment_option')
 
                 checkout_address = CheckoutAddress(
@@ -394,10 +378,9 @@ class AddProduct(View):
             form = AddProductForm(request.POST, request.FILES)
             if form.is_valid():
                 
-                item = form.save(commit=False)  # Utilisez commit=False pour éviter la sauvegarde immédiate
-                item.user = request.user  # Associez l'utilisateur actuel à l'objet Item
+                item = form.save(commit=False)  
+                item.user = request.user  
 
-                # Enregistrez maintenant l'objet Item avec l'utilisateur associé
                 item.save()
                 nombre_produits = Item.objects.filter(user=request.user).count()
                 existing_badge = Badge.objects.filter(user=request.user, label="Collector").first()
@@ -406,16 +389,13 @@ class AddProduct(View):
                         badge = Badge(user=request.user, label="Collector")
                         badge.save()
 
-                # Vous pouvez maintenant accéder au chemin du fichier comme ceci
                 zip_file = item.file.path
                 extract_path = os.path.join('media/extracted', str(item.id))
 
             
     
-                # Créez le répertoire d'extraction s'il n'existe pas
                 os.makedirs(extract_path, exist_ok=True)
 
-                # Extrayez le contenu du fichier ZIP
                 with zipfile.ZipFile(zip_file, 'r') as zip_ref:
                     zip_ref.extractall(extract_path)
 
@@ -436,5 +416,5 @@ class UserBadgeList(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        user_id = self.kwargs['user_id']  # Récupérez l'ID de l'utilisateur depuis les paramètres d'URL
+        user_id = self.kwargs['user_id']  
         return Badge.objects.filter(user_id=user_id)

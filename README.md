@@ -37,5 +37,8 @@ python manage.py collectstatic
 ```sh
 python manage.py runserver
 ```
+
+**Lien en ligne**
+
 # Contributors
 Merci !
