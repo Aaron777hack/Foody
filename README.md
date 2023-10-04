@@ -4,7 +4,7 @@
 ## Homepage
 ![](demo/demo1.png)
 ## Product page
-![](demo/demo2.png)
+![](demo/demo2.gif)
 ## Installation:
 **1.Clone the Repo**
 ```sh
