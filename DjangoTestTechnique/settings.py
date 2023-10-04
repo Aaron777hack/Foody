@@ -25,7 +25,7 @@ SECRET_KEY = '@0%m5m+aal2i_^87$adi_2kjnm4*=htv&%kv3qxi*nueni%c1k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["aaron-ecommerce-app.onrender.com"]
+ALLOWED_HOSTS = ["django-test-technique.onrender.com"]
 
 DATABASES = {
 	"default": dj_database_url.parse("postgres://aarondb_user:VgAzEbpxdemF9SISiCWX7VxnwF4uZcrs@dpg-ck9vg6ddrqvc739jfl6g-a.oregon-postgres.render.com/aarondb")
