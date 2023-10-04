@@ -1,0 +1,24 @@
+/* This styles the aside container */
+
+#aSide {
+    height: 500px;
+    width: 500px;
+    position: absolute;
+    top: calc(50% - 100px);
+    right: 7%;
+}
+
+
+/* This styles the 3D object inserted in the aside container */
+
+#aSide model-viewer {
+    height: 500px;
+    width: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;   
+}
+model-viewer {
+    --progress-bar-color: red;
+  } 

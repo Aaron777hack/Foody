@@ -1,0 +1,66 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+
+<section id="tranding">
+  <div class="container">
+    <h1 class="text-center section-heading">Gallery d'Art 3D</h1>
+  </div>
+  <div class="container">
+    <div class="swiper tranding-slider">
+      <div class="swiper-wrapper">
+       
+        {% for item in object_list %}
+        <!-- Slide-start -->
+        <div class="swiper-slide tranding-slide">
+          <div class="tranding-slide-img">
+            <img src="{{item.img}}" class="card-img-top"
+                  alt="">
+          </div>
+          <div class="tranding-slide-content" style="margin-left:20px; margin-top:20px;">
+            <h2 class="food-name" style="color: white;">
+              <strong>Artiste</strong>
+              <h3>{{item.views}} vue(s)</h3>
+
+            </h2>
+            <h2>
+
+              <span class="badge badge-dark">{{item.user}}</span>
+            </h2>
+            <div class="tranding-slide-content-bottom">
+              <h2 class="food-name">
+                <a href="{% url 'track_product_click' item.pk %}" class="dark-grey-text">
+                  <h2><span class="badge badge-primary">{{item.item_name}}</span></h2>
+
+                </a>
+              </h2>
+              <strong>
+                
+                
+              </strong>
+            </div>
+
+          </div>
+        </div>
+        <!-- Slide-end -->
+        {% endfor %}
+
+      </div>
+
+      <div class="tranding-slider-control">
+        <div class="swiper-button-prev slider-arrow">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+        </div>
+        <div class="swiper-button-next slider-arrow">
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,19 @@
+<!-- success.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bravooo, votre modèle a bien été enregistré !</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    <p class="note note-success">
+        Bravooo, votre modèle a bien été enregistré !
+      </p>
+    <a href="{% url 'addProduct' %}">Enregister un nouveau modèle</a>
+</body>
+</html>
